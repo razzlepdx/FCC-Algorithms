@@ -211,3 +211,40 @@ function truncateString(str, num) {
   }
   return newStr;
 }
+
+function chunkArrayInGroups(arr, size) {
+  /*using splice
+  //make empty array to push small arrays into.
+  //find number of possible chunks and assign to variable
+  //use for loop (number of chunks) time and splice 0 through size,
+  //assign to temp "chunk" array
+  //push to empty array
+  //outside for loop, return (not) empty array
+  var bigArray = [];
+  var numberOfChunks = arr.length / size;
+
+
+  for (var i = 0; i < numberOfChunks; i++) {
+    var chunkArr = arr.splice(0, size);
+    bigArray.push(chunkArr);
+  }*/
+
+  //using slice
+  bigArray = [];
+
+  for (var i = 0; i < arr.length; i += size) {
+    bigArray.push(arr.slice(i, i+size));
+  }
+
+
+  return bigArray;
+}
+
+
+function slasher(arr, howMany) {
+  if (howMany === 0) {
+    return arr;
+  } else {
+  return arr.slice(arr.splice(0,howMany)+1);
+  }
+ }
