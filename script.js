@@ -212,6 +212,9 @@ function truncateString(str, num) {
   return newStr;
 }
 
+
+//Chunky Monkey
+
 function chunkArrayInGroups(arr, size) {
   /*using splice
   //make empty array to push small arrays into.
@@ -241,6 +244,8 @@ function chunkArrayInGroups(arr, size) {
 }
 
 
+//Slasher Flick
+
 function slasher(arr, howMany) {
   if (howMany === 0) {
     return arr;
@@ -248,3 +253,91 @@ function slasher(arr, howMany) {
   return arr.slice(arr.splice(0,howMany)+1);
   }
  }
+
+ //Mutations
+//Returns true if the string in the first element of the array contains all of the letter of the string in the second element of the array
+
+ function mutation(arr) {
+  var strTarget= arr[0].toLowerCase();
+  var strTest = arr[1].toLowerCase();
+  for (var i = 0; i < strTest.length; i++){
+     if (strTarget.indexOf(strTest[i]) < 0) {
+       return false;
+     }
+  }
+  return true;
+}
+
+//Falsy Bouncer - given an array of values - removes all false values and returns the filtered array
+
+function bouncer(arr) {
+ var isTrue = arr.filter (
+   function(trueIndeed){
+     return trueIndeed;
+   }
+   );
+ return isTrue;
+}
+
+//Seek and Destroy - given an array followed by two other arguments, removing all matching values
+//from the array and return the filtered array
+
+function destroyer(arr) {
+  //make arguments into full array
+  var argsArray = Array.prototype.slice.call(arguments);
+  //remove first element to test against
+  argsArray.splice(0,1);
+  //filter arr using indexOf to return only non-matches
+  return arr.filter(
+    function(match) {
+      return argsArray.indexOf(match) === -1;
+    }
+  );
+}
+
+//Where do I belong
+//Given an array of values followed by a single argument, sort all values and return the position of the second argument
+
+function getIndexToIns(arr, num) {
+  //put all args in an array
+  var argArray = Array.prototype.slice.call(arguments);
+  //join into single array and sort by size
+  var Joinedsorted = argArray[0].concat(argArray[1]).sort(function(a,b) {
+    return a-b;
+  });
+  //return index of, searching findIt
+  return Joinedsorted.indexOf(num);
+}
+
+//Caesar's Cipher
+
+function rot13(str) {
+
+  //create new string array
+  var codeArr = [];
+  //iterate through the plaintext string
+  for (i=0; i < str.length; i++)
+  {
+    //identify charCode for each letter
+    var cipherChar = str.charCodeAt(i);
+      //if alphanumeric, add thirteen positions to each letter
+      if ((cipherChar >= 65 && cipherChar <= 90))
+        {
+          var encrypted = cipherChar + 13;
+          //check for characters pushed outside of alphabet and sub 26
+          if (encrypted > 90)
+            {
+              encrypted -= 26;
+            }
+          //push encrypted character to array
+          codeArr.push(String.fromCharCode(encrypted));
+        }
+    else //push non-alpha characters to array with no changes
+        {
+          codeArr.push(String.fromCharCode(cipherChar));
+        }
+  }
+  //return joined array
+  return codeArr.join('');
+
+}
